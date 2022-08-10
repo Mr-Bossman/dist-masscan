@@ -1,5 +1,5 @@
 FROM ubuntu:latest as build
-RUN apt update && apt install -y curl nftables libpcap0.8 git build-essential
+RUN apt update && apt install -y git build-essential
 RUN git clone https://github.com/Mr-Bossman/masscan.git
 WORKDIR masscan
 RUN make
