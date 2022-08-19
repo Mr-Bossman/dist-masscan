@@ -1,6 +1,7 @@
 from twisted.internet import reactor
 from quarry.net.client import ClientFactory, ClientProtocol
 import sys
+import os
 
 class PingProtocol(ClientProtocol):
 	connection_timeout = 1
@@ -30,7 +31,9 @@ def main(argv):
 			reactor.__init__()
 			factory = PingFactory()
 			reactor.connectTCP(ip, 25565, factory, timeout=1)
-			reactor.run()
+			reactor.run(False)
+			os.close(reactor.waker.o)
+			os.close(reactor.waker.i)
 
 if __name__ == "__main__":
 	main(sys.argv[1:])
